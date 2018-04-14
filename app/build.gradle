@@ -28,6 +28,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.google.firebase:firebase-database:15.0.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
+    implementation 'com.github.bumptech.glide:glide:3.7.0' // biblioteca de carga de imagenes mejor que picasso
+    implementation 'de.hdodenhof:circleimageview:2.1.0' // biblioteca para el ImageView circular incluyendo bordes
 }
 
 apply plugin: 'com.google.gms.google-services'
