@@ -25,7 +25,6 @@ public class MenuActivity extends ListActivity {
         PollDimension pollDimension = new PollDimension("what", false);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mRef = firebaseDatabase.getReference().child("s");
-        mRef
         mRef.child("um").setValue(pollDimension);
     }
 }
