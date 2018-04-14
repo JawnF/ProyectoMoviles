@@ -1,4 +1,4 @@
-package itesm.mx.proyectosemestral;
+package mx.itesm.life_tqueremos;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("itesm.mx.proyectosemestral", appContext.getPackageName());
+        assertEquals("mx.itesm.life_tqueremos", appContext.getPackageName());
     }
 }

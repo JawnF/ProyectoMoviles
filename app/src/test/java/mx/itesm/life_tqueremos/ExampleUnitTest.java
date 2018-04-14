@@ -1,4 +1,4 @@
-package itesm.mx.proyectosemestral;
+package mx.itesm.life_tqueremos;
 
 import org.junit.Test;
 
