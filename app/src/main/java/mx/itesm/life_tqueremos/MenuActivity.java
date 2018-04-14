@@ -26,5 +26,6 @@ public class MenuActivity extends ListActivity {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mRef = firebaseDatabase.getReference().child("s");
         mRef.child("um").setValue(pollDimension);
+        Encuesta encuesta = new Encuesta("Emocional");
     }
 }
