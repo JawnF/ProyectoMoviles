@@ -20,10 +20,13 @@ import java.util.ArrayList;
 public class Encuesta implements Parcelable {
     private String nombre;
     private ArrayList<String> preguntas = new ArrayList<>();
-    private int cantPregs =0;
+    private int cantPregs;
+    private boolean ready;
 
     public Encuesta(String name){
         this.nombre = name;
+        cantPregs = 0;
+        ready = false;
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("dimensions").child(nombre).child("preguntas");
         myRef.addValueEventListener(new ValueEventListener() {
@@ -32,9 +35,9 @@ public class Encuesta implements Parcelable {
                 //ArrayList<String> preguntas = new ArrayList<>();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     preguntas.add(postSnapshot.getValue(String.class));
-                    Log.d("PRUEBA", "Value is: " + preguntas.get(cantPregs));
+                    Log.d("PRUEBA2", "Value is: " + preguntas.get(cantPregs));
                     cantPregs++;
-
+                    ready = true;
                 }
 
             }
@@ -55,6 +58,13 @@ public class Encuesta implements Parcelable {
         return nombre;
     }
 
+    public ArrayList<String> getPreguntas(){
+        return preguntas;
+    }
+
+    public boolean getReady(){
+        return ready;
+    }
 
     public Encuesta(Parcel in){
         nombre = in.readString();
