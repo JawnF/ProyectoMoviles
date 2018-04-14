@@ -3,8 +3,15 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ProyectoMoviles.iml" filepath="$PROJECT_DIR$/ProyectoMoviles.iml" />
+<<<<<<< HEAD
+      <module fileurl="file://C:/Users/Android/Documents/TareasTec/Semestre6/Android/ProyectoMoviles/ProyectoMoviles.iml" filepath="C:/Users/Android/Documents/TareasTec/Semestre6/Android/ProyectoMoviles/ProyectoMoviles.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:/Users/Android/Documents/TareasTec/Semestre6/Android/ProyectoMoviles/app/app.iml" filepath="C:/Users/Android/Documents/TareasTec/Semestre6/Android/ProyectoMoviles/app/app.iml" />
+      <module fileurl="file://C:/Users/Android/Documents/TareasTec/Semestre6/Android/ProyectoMoviles/lifetqueremos.iml" filepath="C:/Users/Android/Documents/TareasTec/Semestre6/Android/ProyectoMoviles/lifetqueremos.iml" />
+=======
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\Android\Documents\TareasTec\Semestre6\Android\ProyectoMoviles\lifetqueremos.iml" filepath="C:\Users\Android\Documents\TareasTec\Semestre6\Android\ProyectoMoviles\lifetqueremos.iml" />
+>>>>>>> b5e4a2b905f2e387dedad84d54b967037de97fb2
     </modules>
   </component>
 </project>
