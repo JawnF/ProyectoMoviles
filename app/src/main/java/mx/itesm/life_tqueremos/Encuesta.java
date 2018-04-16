@@ -32,7 +32,6 @@ public class Encuesta implements Parcelable {
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //ArrayList<String> preguntas = new ArrayList<>();
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
                     preguntas.add(postSnapshot.getValue(String.class));
                     Log.d("PRUEBA2", "Value is: " + preguntas.get(cantPregs));
