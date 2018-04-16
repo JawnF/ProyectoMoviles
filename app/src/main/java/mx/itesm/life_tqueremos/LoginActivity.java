@@ -39,10 +39,10 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseUser user = firebaseAuth.getCurrentUser();
         progressDialog = new ProgressDialog(this);
 
-//        if(user != null) {
-//            finish();
-//            startActivity(new Intent(this, MenuActivity.class));
-//        }
+        if(user != null) {
+            finish();
+            startActivity(new Intent(this, MenuActivity.class));
+        }
 
         tvRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
