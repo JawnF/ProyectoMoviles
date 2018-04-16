@@ -1,10 +1,10 @@
 # Tqueremos
 
-### Descripci—n
+### Descripción
 
 Proyecto semestral de la materia Proyecto de Desarrollo para Dispositivos Móviles.
 
-### Versi—n
+### Versión
 
 Versi—n: 1.0
 Fecha: <26/01/18>
@@ -33,7 +33,7 @@ Fecha: <26/01/18>
 | Lic. Patricia González Sandoval | patygzz@itesm.mx |
 
 
-### Instituci—n
+### Institución
 
 Este proyecto fue realizado para la clase de Proyecto de Desarrollo para Dispositivos M—viles - Android.
 
