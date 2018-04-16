@@ -49,7 +49,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 //        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 //        DatabaseReference mRef = firebaseDatabase.getReference().child("s");
 //        mRef.child("um").setValue(pollDimension);
-        Encuesta encuesta = new Encuesta("Emocional");
     }
 
     @Override
@@ -68,6 +67,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 firebaseAuth.signOut();
                 finish();
                 startActivity(new Intent(this, LoginActivity.class));
+
         }
         return false;
     }

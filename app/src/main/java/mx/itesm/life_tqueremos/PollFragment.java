@@ -22,19 +22,26 @@ public class PollFragment extends Fragment {
     ArrayList<String> preguntas;
     TextView tvPregunta, tvActual;
     Button resp1, resp2, resp3;
-    int iActual =0;
+    int iActual = 0;
+    private String sNombreEncuesta;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
         super.onCreateView(inflater, container, savedInstance);
         /*Bundle b = getArguments();
         iMode = b.getInt("modeS");
         iCorrectos = b.getInt("iCorrectos");*/
-
         View scoreView = inflater.inflate(R.layout.poll_fragment, container, false);
+
+        sNombreEncuesta = getArguments().getString("encuesta");
 
         tvPregunta = (TextView) scoreView.findViewById(R.id.tvQuestion);
         tvActual = (TextView) scoreView.findViewById(R.id.tvCount);
-        encuesta = new Encuesta("Emocional");
+
+//        System.out.println("pollfragment2: "+sNombreEncuesta);
+
+
+        encuesta = new Encuesta(sNombreEncuesta);
 
         resp1 = (Button) scoreView.findViewById(R.id.Btn_1);
         resp2 = (Button) scoreView.findViewById(R.id.Btn_2);
