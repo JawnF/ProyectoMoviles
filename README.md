@@ -6,7 +6,7 @@ Proyecto semestral de la materia Proyecto de Desarrollo para Dispositivos Móvil
 
 ### Versión
 
-Versi—n: 1.0
+Versión: 1.0
 Fecha: <26/01/18>
 
 ### Desarrolladores:
