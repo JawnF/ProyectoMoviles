@@ -41,6 +41,9 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.bringToFront();
 
         cvEspiritual = (CardView) findViewById(R.id.cardView_espiritual);
         cvEmocional = (CardView) findViewById(R.id.cardView_emocional);
@@ -66,10 +69,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(intent);
             }
         });
-
-        NavigationView navigationView = findViewById(R.id.navigationView);
-        navigationView.setNavigationItemSelectedListener(this);
-        navigationView.bringToFront();
 
 //        PollDimension pollDimension = new PollDimension("what", false);
 //        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
