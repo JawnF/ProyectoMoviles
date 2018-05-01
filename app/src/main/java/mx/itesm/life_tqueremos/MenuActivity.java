@@ -27,7 +27,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private FirebaseAuth firebaseAuth;
-    private CardView cvEspiritual, cvEmocional;
+    private CardView cvEspiritual, cvEmocional, cvOcupacional, cvFisico, cvFinanciero, cvIntelectual, cvSocial;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,8 +45,79 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.bringToFront();
 
+        cvSocial = (CardView) findViewById(R.id.cardView_social);
         cvEspiritual = (CardView) findViewById(R.id.cardView_espiritual);
+        cvOcupacional = (CardView) findViewById(R.id.cardView_ocupacional);
+        cvFisico = (CardView) findViewById(R.id.cardView_fisico);
+        cvIntelectual = (CardView) findViewById(R.id.cardView_intelectual);
         cvEmocional = (CardView) findViewById(R.id.cardView_emocional);
+        cvFinanciero = (CardView) findViewById(R.id.cardView_Financiero);
+
+        cvOcupacional.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, PollActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("encuesta", "Espiritual");
+                intent.putExtra("encuesta", "Ocupacional");
+                startActivity(intent);
+            }
+        });
+
+        cvSocial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, PollActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("encuesta", "Espiritual");
+                intent.putExtra("encuesta", "Social");
+                startActivity(intent);
+            }
+        });
+
+        cvFisico.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, PollActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("encuesta", "Espiritual");
+                intent.putExtra("encuesta", "Físico");
+                startActivity(intent);
+            }
+        });
+
+        cvIntelectual.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, PollActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("encuesta", "Espiritual");
+                intent.putExtra("encuesta", "Intelectual");
+                startActivity(intent);
+            }
+        });
+
+        cvFinanciero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, PollActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("encuesta", "Espiritual");
+                intent.putExtra("encuesta", "Financiero");
+                startActivity(intent);
+            }
+        });
+
+        cvSocial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuActivity.this, PollActivity.class);
+//                Bundle bundle = new Bundle();
+//                bundle.putString("encuesta", "Espiritual");
+                intent.putExtra("encuesta", "Social");
+                startActivity(intent);
+            }
+        });
 
         cvEspiritual.setOnClickListener(new View.OnClickListener() {
             @Override
