@@ -8,9 +8,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
-public class PollActivity extends AppCompatActivity {
+public class PollActivity extends AppCompatActivity implements PollFragment.OnQuestionAnsweredListener {
 
     private String sNombreEncuesta;
+
+    @Override
+    public void onQuestionAnswered(int points) {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

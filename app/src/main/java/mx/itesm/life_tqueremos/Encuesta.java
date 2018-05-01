@@ -1,5 +1,6 @@
 package mx.itesm.life_tqueremos;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -21,12 +22,16 @@ public class Encuesta implements Parcelable {
     private String nombre;
     private ArrayList<String> preguntas = new ArrayList<>();
     private int cantPregs;
-    private boolean ready;
+    private OnPollReadyListener listener;
 
-    public Encuesta(String name){
+    interface OnPollReadyListener{
+        void onPollReady();
+    }
+
+    public Encuesta(final OnPollReadyListener listener, String name){
         this.nombre = name;
         cantPregs = 0;
-        ready = false;
+        this.listener = listener;
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("dimensions").child(nombre).child("preguntas");
         myRef.addValueEventListener(new ValueEventListener() {
@@ -36,7 +41,7 @@ public class Encuesta implements Parcelable {
                     preguntas.add(postSnapshot.getValue(String.class));
                     Log.d("PRUEBA2", "Value is: " + preguntas.get(cantPregs));
                     cantPregs++;
-                    ready = true;
+                    listener.onPollReady();
                 }
 
             }
@@ -59,10 +64,6 @@ public class Encuesta implements Parcelable {
 
     public ArrayList<String> getPreguntas(){
         return preguntas;
-    }
-
-    public boolean getReady(){
-        return ready;
     }
 
     public Encuesta(Parcel in){

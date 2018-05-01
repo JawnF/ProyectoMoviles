@@ -17,13 +17,54 @@ import java.util.ArrayList;
  * Created by Android on 14/04/2018.
  */
 
-public class PollFragment extends Fragment {
+public class PollFragment extends Fragment implements Encuesta.OnPollReadyListener {
     Encuesta encuesta;
     ArrayList<String> preguntas;
     TextView tvPregunta, tvActual;
     Button resp1, resp2, resp3;
     int iActual = 0;
     private String sNombreEncuesta;
+
+
+    /*
+        Empty constructor
+    */
+    public PollFragment(){  }
+
+
+
+    /*
+        Instanciador con argumentos
+    */
+    public static PollFragment newInstance(){
+        PollFragment pollFragment = new PollFragment();
+        Bundle args = new Bundle();
+        pollFragment.setArguments(args);
+        return pollFragment;
+    }
+
+
+
+    /*
+        Listener para sumar puntos al resultado cuando se contesta pregunta
+    */
+    interface OnQuestionAnsweredListener{
+        void onQuestionAnswered(int points);
+    }
+
+
+
+    /*
+        Esta funcion se llama cuando la encuesta se termina de cargar de la base de datos.
+        Sirve para cargar la primera pregunta cuando este lista.
+    */
+    @Override
+    public void onPollReady() {
+        tvPregunta.setText(encuesta.getPreguntas().get(iActual));
+        tvActual.setText((iActual+1)+" de 10");
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
@@ -41,7 +82,7 @@ public class PollFragment extends Fragment {
 //        System.out.println("pollfragment2: "+sNombreEncuesta);
 
 
-        encuesta = new Encuesta(sNombreEncuesta);
+        encuesta = new Encuesta(this, sNombreEncuesta);
 
         resp1 = (Button) scoreView.findViewById(R.id.Btn_1);
         resp2 = (Button) scoreView.findViewById(R.id.Btn_2);
@@ -53,6 +94,8 @@ public class PollFragment extends Fragment {
 
         return scoreView;
     }
+
+
 
     View.OnClickListener onClik = new View.OnClickListener(){
         @Override
@@ -70,6 +113,8 @@ public class PollFragment extends Fragment {
         }
     };
 
+
+
     public void nextQuestion(){
         iActual++;
         if(iActual == 10)
@@ -77,16 +122,15 @@ public class PollFragment extends Fragment {
         tvPregunta.setText(encuesta.getPreguntas().get(iActual));
         tvActual.setText((iActual+1)+" de 10");
     }
+
+
+
     @Override
     public void onStart() {
         super.onStart();
         Bundle args = getArguments();
         if (args != null) {
 
-        }
-        if (encuesta.getReady() == true) {
-            tvPregunta.setText(encuesta.getPreguntas().get(iActual));
-            tvActual.setText((iActual+1)+" de 10");
         }
     }
 }
