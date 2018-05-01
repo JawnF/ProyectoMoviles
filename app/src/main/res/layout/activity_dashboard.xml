@@ -18,8 +18,9 @@
         android:layout_width="fill_parent"
         android:layout_height="2dip"
         android:background="#4CAF50" />
-    
+
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -33,81 +34,95 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
+
                 <android.support.v7.widget.CardView
                     android:layout_width="128dp"
                     android:layout_height="172dp"
-                    android:layout_margin="8dp">
+                    android:layout_margin="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="54dp"
                             android:layout_height="54dp"
                             android:background="@drawable/cerclebackgroundpurple"
-                            android:src="@drawable/ic_people_black_24dp"
-                            android:padding="10dp"/>
+                            android:padding="10dp"
+                            android:src="@drawable/ic_people_black_24dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Social"/>
+                            android:text="Social"
+                            android:textStyle="bold" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/lightgray"
-                            android:layout_margin="10dp"/>
+                            android:layout_margin="10dp"
+                            android:background="@color/lightgray" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Contribucion al medio ambiente y a la comunidad"
                             android:padding="5dp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:text="Contribucion al medio ambiente y a la comunidad"
+                            android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/cardView_espiritual"
                     android:layout_width="128dp"
                     android:layout_height="172dp"
-                    android:layout_margin="8dp">
+                    android:layout_margin="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="54dp"
                             android:layout_height="54dp"
                             android:background="@drawable/cerclebackgroundgreen"
-                            android:src="@drawable/ic_spa_black_24dp"
-                            android:padding="10dp"/>
+                            android:padding="10dp"
+                            android:src="@drawable/ic_spa_black_24dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Espiritual"/>
+                            android:text="Espiritual"
+                            android:textStyle="bold" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/lightgray"
-                            android:layout_margin="10dp"/>
+                            android:layout_margin="10dp"
+                            android:background="@color/lightgray" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Busqueda del proposito en la existencia humana"
                             android:padding="5dp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:text="Busqueda del proposito en la existencia humana"
+                            android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
 
@@ -119,42 +134,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
+
                 <android.support.v7.widget.CardView
                     android:layout_width="128dp"
                     android:layout_height="172dp"
-                    android:layout_margin="8dp">
+                    android:layout_margin="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="54dp"
                             android:layout_height="54dp"
                             android:background="@drawable/cerclebackgroundyello"
-                            android:src="@drawable/ic_work_black_24dp"
-                            android:padding="10dp"/>
+                            android:padding="10dp"
+                            android:src="@drawable/ic_work_black_24dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Ocupacional"/>
+                            android:text="Ocupacional"
+                            android:textStyle="bold" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/lightgray"
-                            android:layout_margin="10dp"/>
+                            android:layout_margin="10dp"
+                            android:background="@color/lightgray" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Crecimiento personal a traves del trabajo"
                             android:padding="5dp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:text="Crecimiento personal a traves del trabajo"
+                            android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
 
@@ -163,37 +185,43 @@
                 <android.support.v7.widget.CardView
                     android:layout_width="128dp"
                     android:layout_height="172dp"
-                    android:layout_margin="8dp">
+                    android:layout_margin="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="54dp"
                             android:layout_height="54dp"
                             android:background="@drawable/cerclebackgroundpink"
-                            android:src="@drawable/ic_directions_run_black_24dp"
-                            android:padding="10dp"/>
+                            android:padding="10dp"
+                            android:src="@drawable/ic_directions_run_black_24dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Fisico"/>
+                            android:text="Fisico"
+                            android:textStyle="bold" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/lightgray"
-                            android:layout_margin="10dp"/>
+                            android:layout_margin="10dp"
+                            android:background="@color/lightgray" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Regulacion de Actividad Fisica"
                             android:padding="5dp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:text="Regulacion de Actividad Fisica"
+                            android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
 
@@ -205,81 +233,95 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
+
                 <android.support.v7.widget.CardView
                     android:layout_width="128dp"
                     android:layout_height="172dp"
-                    android:layout_margin="8dp">
+                    android:layout_margin="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="54dp"
                             android:layout_height="54dp"
                             android:background="@drawable/cerclebackgroundblue"
-                            android:src="@drawable/ic_lightbulb_outline_black_24dp"
-                            android:padding="10dp"/>
+                            android:padding="10dp"
+                            android:src="@drawable/ic_lightbulb_outline_black_24dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Intelectual"/>
+                            android:text="Intelectual"
+                            android:textStyle="bold" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/lightgray"
-                            android:layout_margin="10dp"/>
+                            android:layout_margin="10dp"
+                            android:background="@color/lightgray" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Actividades mentales estimulantes"
                             android:padding="5dp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:text="Actividades mentales estimulantes"
+                            android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
 
                 </android.support.v7.widget.CardView>
 
                 <android.support.v7.widget.CardView
+                    android:id="@+id/cardView_emocional"
                     android:layout_width="128dp"
                     android:layout_height="172dp"
-                    android:layout_margin="8dp">
+                    android:layout_margin="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="54dp"
                             android:layout_height="54dp"
                             android:background="@drawable/cercleobackgroundred"
-                            android:src="@drawable/ic_favorite_black_24dp"
-                            android:padding="10dp"/>
+                            android:padding="10dp"
+                            android:src="@drawable/ic_favorite_black_24dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Emocional"/>
+                            android:text="Emocional"
+                            android:textStyle="bold" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/lightgray"
-                            android:layout_margin="10dp"/>
+                            android:layout_margin="10dp"
+                            android:background="@color/lightgray" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Coniencia de propios sentimientos"
                             android:padding="5dp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:text="Coniencia de propios sentimientos"
+                            android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
 
@@ -291,42 +333,49 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
-                android:orientation="horizontal"
-                android:gravity="center">
+                android:gravity="center"
+                android:orientation="horizontal">
+
                 <android.support.v7.widget.CardView
                     android:layout_width="272dp"
                     android:layout_height="150dp"
-                    android:layout_margin="8dp">
+                    android:layout_margin="8dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:clickable="true">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:gravity="center">
+                        android:gravity="center"
+                        android:orientation="vertical">
+
                         <ImageView
                             android:layout_width="54dp"
                             android:layout_height="54dp"
                             android:background="@drawable/cerclebackgroundorange"
-                            android:src="@drawable/ic_attach_money_black_24dp"
-                            android:padding="10dp"/>
+                            android:padding="10dp"
+                            android:src="@drawable/ic_attach_money_black_24dp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textStyle="bold"
                             android:layout_marginTop="10dp"
-                            android:text="Financiero"/>
+                            android:text="Financiero"
+                            android:textStyle="bold" />
+
                         <View
                             android:layout_width="match_parent"
                             android:layout_height="1dp"
-                            android:background="@color/lightgray"
-                            android:layout_margin="10dp"/>
+                            android:layout_margin="10dp"
+                            android:background="@color/lightgray" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:text="Aspectos mentales y fisicos del dinero"
                             android:padding="5dp"
-                            android:textColor="@android:color/darker_gray"/>
+                            android:text="Aspectos mentales y fisicos del dinero"
+                            android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
 
