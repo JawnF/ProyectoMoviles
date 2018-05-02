@@ -8,13 +8,35 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 
-public class PollActivity extends AppCompatActivity implements PollFragment.OnQuestionAnsweredListener {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class PollActivity extends AppCompatActivity implements PollFragment.OnPollAnsweredListener,
+                                                                Encuesta.OnPollReadyListener  {
 
     private String sNombreEncuesta;
+    Encuesta encuesta;
 
     @Override
-    public void onQuestionAnswered(int points) {
+    public void onPollAnswered(int points) {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+                .child("active").child(sNombreEncuesta).setValue(points);
+        finish();
+    }
 
+    //    Esta funcion se llama cuando la encuesta se termina de cargar de la base de datos.
+    //    Sirve para cargar la primera pregunta cuando este lista.
+    @Override
+    public void onPollReady() {
+        PollFragment pollFragment = PollFragment.newInstance(encuesta);
+
+//        Bundle bundle = new Bundle();
+        Bundle bundle = new Bundle();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, pollFragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -22,22 +44,15 @@ public class PollActivity extends AppCompatActivity implements PollFragment.OnQu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poll);
 
+
 //        Bundle bundle = getIntent().getExtras();
         Intent intent = getIntent();
         sNombreEncuesta = intent.getStringExtra("encuesta");
+        encuesta = new Encuesta(this, sNombreEncuesta);
 //        System.out.println("nombre encuesta: "+sNombreEncuesta);
 
 
-        PollFragment pollFragment = new PollFragment();
 
-//        Bundle bundle = new Bundle();
-        Bundle bundle = new Bundle();
-        bundle.putString("encuesta", sNombreEncuesta);
-        pollFragment.setArguments(bundle);
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, pollFragment);
-        fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
 
     }
 
