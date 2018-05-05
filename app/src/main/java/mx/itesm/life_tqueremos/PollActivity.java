@@ -20,7 +20,6 @@ public class PollActivity extends AppCompatActivity implements PollFragment.OnPo
     private String sNombreEncuesta;
     Encuesta encuesta;
 
-
     // Recibe resultado de encuesta y lo guarda en base de datos
     @Override
     public void onPollAnswered(int points) {
