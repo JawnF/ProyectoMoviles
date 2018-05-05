@@ -24,14 +24,12 @@ import java.util.Stack;
 
 public class PollFragment extends Fragment {
     Encuesta encuesta;
-    ArrayList<String> preguntas;
     TextView tvPregunta, tvActual;
     Button resp1, resp2, resp3, back;
     int iActual = 0;
-    private String sNombreEncuesta;
-    private OnPollAnsweredListener mCallback;
-    private int score = 0;
-    private Stack<Integer> last_answers;
+    protected OnPollAnsweredListener mCallback;
+    protected int score = 0;
+    protected Stack<Integer> last_answers;
     ProgressBar progress;
 
     private final int POINTS_BUENO = 2;
@@ -87,13 +85,18 @@ public class PollFragment extends Fragment {
         last_answers = new Stack<Integer>();
     }
 
+
+    protected View getView(LayoutInflater inflater, ViewGroup container){
+        return inflater.inflate(R.layout.poll_fragment, container, false);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
         super.onCreateView(inflater, container, savedInstance);
         /*Bundle b = getArguments();
         iMode = b.getInt("modeS");
         iCorrectos = b.getInt("iCorrectos");*/
-        View scoreView = inflater.inflate(R.layout.poll_fragment, container, false);
+        View scoreView = this.getView(inflater, container);
 
         encuesta = getArguments().getParcelable("encuesta");
 
@@ -119,7 +122,7 @@ public class PollFragment extends Fragment {
 
 
 
-    View.OnClickListener onClik = new View.OnClickListener(){
+    private View.OnClickListener onClik = new View.OnClickListener(){
         @Override
         public void onClick(View v){
             switch (v.getId()){
@@ -148,7 +151,7 @@ public class PollFragment extends Fragment {
 
 
 
-    private void prevQuestion(){
+    protected void prevQuestion(){
         if(--iActual == 0)
             back.setEnabled(false);
         progress.setProgress(iActual);
@@ -158,7 +161,7 @@ public class PollFragment extends Fragment {
 
 
 
-    public void nextQuestion(){
+    protected void nextQuestion(){
         if(++iActual == 10) {
             mCallback.onPollAnswered(score);
             return;

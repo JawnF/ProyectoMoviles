@@ -11,6 +11,15 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@android:style/Widget.Material.Light.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animationResolution="@android:integer/config_shortAnimTime"
+            android:max="9"
+            android:progress="0" />
+
         <TextView
             android:id="@+id/tvCount"
             android:layout_width="300dp"
@@ -25,13 +34,13 @@
             android:layout_width="300dp"
             android:layout_height="150dp"
             android:layout_marginTop="30dp"
-            android:gravity="center_horizontal"
+            android:gravity="center"
             android:textColor="@android:color/black"
             android:textSize="25dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal">
 
@@ -75,6 +84,13 @@
                 android:layout_marginTop="20dp"
                 android:text="Debe de estar bromeando" />
         </LinearLayout>
+
+        <Button
+            android:id="@+id/Btn_anterior"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:enabled="false"
+            android:text="Pregunta anterior" />
     </LinearLayout>
 
 </FrameLayout>
