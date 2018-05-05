@@ -32,13 +32,27 @@ public class PollActivity extends AppCompatActivity implements PollFragment.OnPo
     //    Sirve para cargar la primera pregunta cuando este lista.
     @Override
     public void onPollReady() {
-        PollFragment pollFragment = PollFragment.newInstance(encuesta);
 
-//        Bundle bundle = new Bundle();
-        Bundle bundle = new Bundle();
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, pollFragment);
-        fragmentTransaction.commit();
+        if(sNombreEncuesta.equals("Financiero")) {
+            Log.d("Nombre", "Debi entrar a financiero");
+            FinancieroFragment financieroFragment = new FinancieroFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("encuesta", sNombreEncuesta);
+            financieroFragment.setArguments(bundle);
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, financieroFragment);
+            fragmentTransaction.commit();
+        }
+        else {
+            Log.d("Nombre", "No entre a financiero");
+            PollFragment pollFragment = PollFragment.newInstance(encuesta);
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, pollFragment);
+            fragmentTransaction.commit();
+        }
+
+
+
     }
 
     @Override
@@ -55,28 +69,6 @@ public class PollActivity extends AppCompatActivity implements PollFragment.OnPo
 
         Log.d("Nombre encuesta", sNombreEncuesta);
 
-        if(sNombreEncuesta.equals("Financiero")) {
-            Log.d("Nombre", "Debi entrar a financiero");
-            FinancieroFragment financieroFragment = new FinancieroFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("encuesta", sNombreEncuesta);
-            financieroFragment.setArguments(bundle);
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, financieroFragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-        }
-        else {
-            Log.d("Nombre", "No entre a financiero");
-            PollFragment pollFragment = new PollFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("encuesta", sNombreEncuesta);
-            pollFragment.setArguments(bundle);
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, pollFragment);
-            fragmentTransaction.addToBackStack(null);
-            fragmentTransaction.commit();
-        }
 
     }
 
