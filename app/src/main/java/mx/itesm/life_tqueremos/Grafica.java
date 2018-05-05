@@ -1,10 +1,14 @@
 package mx.itesm.life_tqueremos;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.RadarChart;
@@ -41,6 +45,20 @@ public class Grafica extends AppCompatActivity{
         ArrayAdapter Adapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,mActivities);
 
         list.setAdapter(Adapter);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+
+                Intent intent = new Intent(Grafica.this,RecomendacionActivity.class);
+                intent.putExtra("Posicion",position);
+                intent.putExtra("String",mActivities);
+                startActivity(intent);
+
+            }
+
+
+        });
 
         rChart = (RadarChart) findViewById(R.id.chart);
 
