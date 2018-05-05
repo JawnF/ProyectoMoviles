@@ -163,7 +163,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 firebaseAuth.signOut();
                 finish();
                 startActivity(new Intent(this, LoginActivity.class));
-
+                break;
+            case R.id.resultados:
+                startActivity(new Intent (this, Grafica.class));
+                break;
         }
         return false;
     }
