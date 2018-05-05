@@ -10,26 +10,28 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ProgressBar;
 
-public class PollActivity extends AppCompatActivity implements PollFragment.OnQuestionAnsweredListener {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+public class PollActivity extends AppCompatActivity implements PollFragment.OnPollAnsweredListener,
+                                                                Encuesta.OnPollReadyListener  {
 
     private String sNombreEncuesta;
+    Encuesta encuesta;
 
     @Override
-    public void onQuestionAnswered(int points) {
-
+    public void onPollAnswered(int points) {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child(uid)
+                .child("active").child(sNombreEncuesta).setValue(points);
+        finish();
     }
 
+    //    Esta funcion se llama cuando la encuesta se termina de cargar de la base de datos.
+    //    Sirve para cargar la primera pregunta cuando este lista.
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_poll);
-
-//        Bundle bundle = getIntent().getExtras();
-        Intent intent = getIntent();
-        sNombreEncuesta = intent.getStringExtra("encuesta");
-//        System.out.println("nombre encuesta: "+sNombreEncuesta);
-
-        Log.d("Nombre encuesta", sNombreEncuesta);
+    public void onPollReady() {
 
         if(sNombreEncuesta.equals("Financiero")) {
             Log.d("Nombre", "Debi entrar a financiero");
@@ -39,22 +41,33 @@ public class PollActivity extends AppCompatActivity implements PollFragment.OnQu
             financieroFragment.setArguments(bundle);
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, financieroFragment);
-            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
         else {
             Log.d("Nombre", "No entre a financiero");
-            PollFragment pollFragment = new PollFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("encuesta", sNombreEncuesta);
-            pollFragment.setArguments(bundle);
+            PollFragment pollFragment = PollFragment.newInstance(encuesta);
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, pollFragment);
-            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
 
-//        Bundle bundle = new Bundle();
+
+
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_poll);
+
+
+//        Bundle bundle = getIntent().getExtras();
+        Intent intent = getIntent();
+        sNombreEncuesta = intent.getStringExtra("encuesta");
+        encuesta = new Encuesta(this, sNombreEncuesta);
+//        System.out.println("nombre encuesta: "+sNombreEncuesta);
+
+        Log.d("Nombre encuesta", sNombreEncuesta);
 
 
     }
