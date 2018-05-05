@@ -20,6 +20,8 @@ public class PollActivity extends AppCompatActivity implements PollFragment.OnPo
     private String sNombreEncuesta;
     Encuesta encuesta;
 
+
+    // Recibe resultado de encuesta y lo guarda en base de datos
     @Override
     public void onPollAnswered(int points) {
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -28,38 +30,40 @@ public class PollActivity extends AppCompatActivity implements PollFragment.OnPo
         finish();
     }
 
+
+
     //    Esta funcion se llama cuando la encuesta se termina de cargar de la base de datos.
     //    Sirve para cargar la primera pregunta cuando este lista.
     @Override
     public void onPollReady() {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         if(sNombreEncuesta.equals("Financiero")) {
             Log.d("Nombre", "Debi entrar a financiero");
-            FinancieroFragment financieroFragment = new FinancieroFragment();
-            Bundle bundle = new Bundle();
-            bundle.putString("encuesta", sNombreEncuesta);
-            financieroFragment.setArguments(bundle);
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            FinancieroFragment financieroFragment = FinancieroFragment.newInstance(encuesta);
             fragmentTransaction.replace(R.id.fragment_container, financieroFragment);
-            fragmentTransaction.commit();
         }
         else {
             Log.d("Nombre", "No entre a financiero");
             PollFragment pollFragment = PollFragment.newInstance(encuesta);
-            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.fragment_container, pollFragment);
-            fragmentTransaction.commit();
         }
 
+        fragmentTransaction.commit();
 
 
     }
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poll);
 
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.fragment_container, LoadingFragment.newInstance());
+        fragmentTransaction.commit();
 
 //        Bundle bundle = getIntent().getExtras();
         Intent intent = getIntent();
