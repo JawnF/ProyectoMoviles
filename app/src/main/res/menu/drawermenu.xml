@@ -11,6 +11,7 @@
         android:title="Encuestas" />
     <item
         android:id="@+id/resultados"
+        android:icon="@drawable/ic_assessment_black_24dp"
         android:title="Resultados" />
     <item
         android:id="@+id/logout"

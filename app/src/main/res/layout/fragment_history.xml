@@ -21,6 +21,7 @@
         android:background="#4CAF50" />
 
     <ListView
+        android:listSelector="@android:color/transparent"
         app:layout_constraintTop_toBottomOf="@id/resultados_title"
         android:dividerHeight="0dp"
         android:divider="@null"
