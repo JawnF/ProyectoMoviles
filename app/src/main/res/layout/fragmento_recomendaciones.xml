@@ -42,30 +42,34 @@ tools:layout_editor_absoluteY="81dp">
         android:layout_height="match_parent"></com.github.mikephil.charting.charts.PieChart>
 </LinearLayout>
 
-<LinearLayout
-    android:id="@+id/layout4"
-    android:orientation="vertical"
-    android:layout_marginTop="15dp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
+        android:id="@+id/layout4"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="20dp"
-        android:gravity="center_horizontal"
-        android:textSize="20dp"
-        android:text="Te recomendamos..." />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/Recomendaciones"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp"
+            android:gravity="center_horizontal"
+            android:textSize="20dp"
+            android:text="Te recomendamos..." />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/Recomendaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:gravity="left"
+            android:text="TextView" />
+
+    </LinearLayout>
+
 
 
 </LinearLayout>
