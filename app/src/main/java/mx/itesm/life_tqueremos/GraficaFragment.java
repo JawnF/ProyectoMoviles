@@ -15,6 +15,8 @@ package mx.itesm.life_tqueremos;
 import android.annotation.SuppressLint;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -65,11 +67,12 @@ import mx.itesm.life_tqueremos.R;
 
 public class GraficaFragment extends Fragment {
 
-    private String[] mActivities = new String[]{"Ocupacional", "Social", "Emocional", "Financiero", "Espiritual","Intelectual","Fisico"};
+    private String[] mActivities = new String[]{"Ocupacional", "Social", "Emocional", "Financiero", "Espiritual","Intelectual","Físico"};
     ListView list;
     private RadarChart rChart;
     Resultados resultados;
     Long id;
+    OnDimensionSelectedListener mCallback;
 
     public static GraficaFragment newInstance(OnFragmentReadyListener listener, long id){
         GraficaFragment fragment = new GraficaFragment();
@@ -98,6 +101,8 @@ public class GraficaFragment extends Fragment {
         ArrayAdapter Adapter = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,mActivities);
 
         list.setAdapter(Adapter);
+
+        list.setOnItemClickListener(null);
 
         rChart = (RadarChart) graficaView.findViewById(R.id.chart);
 
@@ -133,6 +138,22 @@ public class GraficaFragment extends Fragment {
         yAxis.setDrawLabels(false);
         return graficaView;
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity;
+
+        if(context instanceof Activity){
+            activity = (Activity) context;
+            try{
+                mCallback = (OnDimensionSelectedListener) activity;
+            } catch (ClassCastException e){
+                throw new ClassCastException(activity.toString()
+                        + " must implement OnDimensionSelectedListener");
+            }
+        }
     }
 
     public void setData()

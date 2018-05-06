@@ -38,11 +38,12 @@ interface OnFragmentReadyListener{
 }
 
 public class ResultsActivity extends AppCompatActivity implements OnFragmentReadyListener,
-                            HistoryFragment.OnFechaSelectedListener {
+                            HistoryFragment.OnFechaSelectedListener,
+                            GraficaFragment.OnDimensionSelectedListener{
 
     Fragment fragment;
-    Fragment past;
     Fragment list;
+    boolean addToBack = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,13 +66,21 @@ public class ResultsActivity extends AppCompatActivity implements OnFragmentRead
 
     @Override
     public void onFragmentReady() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
-                .addToBackStack(null).commit();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_container, fragment);
+        if(addToBack)
+                ft.addToBackStack(null);
+        ft.commit();
     }
 
     @Override
     public void onFechaSelected(Long id) {
+        addToBack = true;
         fragment = GraficaFragment.newInstance(this, id);
+    }
+
+    @Override
+    public void onDimensionSelected(Long id) {
+
     }
 }

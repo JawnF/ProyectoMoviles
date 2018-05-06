@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -50,12 +51,13 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-    int iCount = 0;
+    private int iCount = 0;
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
     private FirebaseAuth firebaseAuth;
     private CardView cvEspiritual, cvEmocional, cvOcupacional, cvFisico, cvFinanciero, cvIntelectual, cvSocial;
     DoneListenerClass listener;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +74,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        NavigationView navigationView = findViewById(R.id.navigationView);
+        navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.bringToFront();
 
@@ -234,12 +236,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
                     }
                 });
-
-
-//        PollDimension pollDimension = new PollDimension("what", false);
-//        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-//        DatabaseReference mRef = firebaseDatabase.getReference().child("s");
-//        mRef.child("um").setValue(pollDimension);
     }
 
     @Override
@@ -253,6 +249,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        mDrawerLayout.closeDrawers();
         switch (item.getItemId()) {
             case R.id.logout:
                 firebaseAuth.signOut();
@@ -281,5 +278,13 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         DoneFragment fragment = DoneFragment.newInstance();
         FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
         transaction.add(R.id.menu_container, fragment, "DONE_SCREEN").commitAllowingStateLoss();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(mDrawerLayout.isDrawerOpen(Gravity.START))
+            mDrawerLayout.closeDrawers();
+        else
+            super.onBackPressed();
     }
 }
