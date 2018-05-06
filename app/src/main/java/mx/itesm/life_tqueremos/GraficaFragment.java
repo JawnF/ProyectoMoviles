@@ -22,6 +22,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -64,9 +65,10 @@ import mx.itesm.life_tqueremos.R;
 
 public class GraficaFragment extends Fragment {
 
-    private String[] mActivities = new String[]{"Bienestar", "Social", "Emocional", "Financiero", "Espiritual","Intelectual","Fisico"};
+    private String[] mActivities = new String[]{"Ocupacional", "Social", "Emocional", "Financiero", "Espiritual","Intelectual","Fisico"};
     ListView list;
     private RadarChart rChart;
+    Resultados resultados;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
@@ -89,8 +91,14 @@ public class GraficaFragment extends Fragment {
         rChart.setWebLineWidthInner(1f);
         rChart.setWebColorInner(Color.BLACK);
         rChart.setWebAlpha(100);
+        resultados = new Resultados();
 
-        setData();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                setData();
+            }
+        }, 1000);   //5 seconds
 
         XAxis xAxis = rChart.getXAxis();
         xAxis.setTextSize(9f);
@@ -120,17 +128,17 @@ public class GraficaFragment extends Fragment {
         int count=7;
         ArrayList<RadarEntry> entry = new ArrayList<RadarEntry>();
 
-        entry.add(new RadarEntry(10));
-        entry.add(new RadarEntry(80));
-        entry.add(new RadarEntry(30));
-        entry.add(new RadarEntry(50));
-        entry.add(new RadarEntry(40));
-        entry.add(new RadarEntry(20));
-        entry.add(new RadarEntry(60));
+        entry.add(new RadarEntry(resultados.getOcupacional()));
+        entry.add(new RadarEntry(resultados.getSocial()));
+        entry.add(new RadarEntry(resultados.getEmocional()));
+        entry.add(new RadarEntry(resultados.getFinanciero()));
+        entry.add(new RadarEntry(resultados.getEspiritual()));
+        entry.add(new RadarEntry(resultados.getIntelectual()));
+        entry.add(new RadarEntry(resultados.getFisico()));
 
-        RadarDataSet set = new RadarDataSet(entry,"");
-        set.setColor(Color.BLUE);
-        set.setFillColor(Color.BLUE);
+        RadarDataSet set = new RadarDataSet(entry,"Bienestar");
+        set.setColor(Color.parseColor("#64bf5d"));
+        set.setFillColor(Color.parseColor("#6edd66"));
         set.setDrawFilled(true);
         set.setFillAlpha(180);
         set.setLineWidth(2f);
@@ -142,13 +150,14 @@ public class GraficaFragment extends Fragment {
 
         RadarData data = new RadarData(sets);
         data.setValueTextSize(8f);
-        data.setDrawValues(false);
-        data.setValueTextColor(Color.RED);
+        data.setDrawValues(true);
+        data.setValueTextColor(Color.BLACK);
 
         rChart.setData(data);
         Description description = new Description();
         description.setText(" ");
         rChart.setDescription(description);
+        rChart.setTouchEnabled(false);
         rChart.getLegend().setEnabled(false);
         rChart.invalidate();
     }
