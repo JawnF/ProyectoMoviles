@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -32,6 +33,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -83,6 +85,57 @@ public class GraficaFragment extends Fragment {
         ArrayAdapter Adapter = new ArrayAdapter(getContext(),android.R.layout.simple_list_item_1,mActivities);
 
         list.setAdapter(Adapter);
+
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                int iEnviar=0;
+                switch(position)
+                {
+                    case 0:
+                        iEnviar = resultados.getOcupacional();
+                        break;
+                    case 1:
+                        iEnviar = resultados.getSocial();
+                        break;
+                    case 2:
+                        iEnviar = resultados.getEmocional();
+                        break;
+                    case 3:
+                        iEnviar = resultados.getFinanciero();
+                        break;
+                    case 4:
+                        iEnviar = resultados.getEspiritual();
+                        break;
+                    case 5:
+                        iEnviar = resultados.getIntelectual();
+                        break;
+                    case 6:
+                        iEnviar = resultados.getFisico();
+                        break;
+
+                }
+                FragmentoRecomendaciones fragmentoRecomendaciones = new FragmentoRecomendaciones();
+                Bundle bundle = new Bundle();
+                bundle.putStringArray("String", mActivities);
+                bundle.putInt("Posicion", position);
+                bundle.putInt("res", iEnviar);
+                fragmentoRecomendaciones.setArguments(bundle);
+
+                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, fragmentoRecomendaciones);
+                fragmentTransaction.addToBackStack(null).commit();
+
+                /*Intent intent = new Intent(Grafica.this,RecomendacionActivity.class);
+                intent.putExtra("Posicion",position);
+                intent.putExtra("String",mActivities);
+                startActivity(intent);*/
+
+            }
+
+
+        });
 
         rChart = (RadarChart) graficaView.findViewById(R.id.chart);
 
