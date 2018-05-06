@@ -1,5 +1,6 @@
 package mx.itesm.life_tqueremos;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -47,6 +48,7 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             callback.done();
         }
     }
+
 
     int iCount = 0;
     private DrawerLayout mDrawerLayout;
@@ -258,21 +260,26 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(this, LoginActivity.class));
                 break;
             case R.id.resultados:
-                startActivity(new Intent (this, Grafica.class));
+                startActivity(new Intent (this, ResultsActivity.class));
                 break;
         }
         return false;
     }
 
     @Override
-    public void onStartNewInteraction() {
-        Toast.makeText(this, "Start new", Toast.LENGTH_SHORT).show();
+    public void onStartNewInteraction(long id) {
+        Intent intent = new Intent(getApplicationContext(), ResultsActivity.class);
+        intent.putExtra("encuesta", id);
+        Intent self = getIntent();
+        this.finish();
+        startActivity(self);
+        startActivity(intent);
     }
 
     @Override
     public void done() {
         DoneFragment fragment = DoneFragment.newInstance();
         FragmentTransaction transaction= getSupportFragmentManager().beginTransaction();
-        transaction.add(R.id.menu_container, fragment).commitAllowingStateLoss();
+        transaction.add(R.id.menu_container, fragment, "DONE_SCREEN").commitAllowingStateLoss();
     }
 }

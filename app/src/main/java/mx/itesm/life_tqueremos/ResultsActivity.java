@@ -25,6 +25,7 @@ import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
+import com.google.android.gms.dynamic.SupportFragmentWrapper;
 
 import java.util.ArrayList;
 
@@ -36,32 +37,41 @@ interface OnFragmentReadyListener{
     void onFragmentReady();
 }
 
-public class Grafica extends AppCompatActivity implements OnFragmentReadyListener,
+public class ResultsActivity extends AppCompatActivity implements OnFragmentReadyListener,
                             HistoryFragment.OnFechaSelectedListener {
 
     Fragment fragment;
+    Fragment past;
+    Fragment list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poll);
+
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, LoadingFragment.newInstance());
         fragmentTransaction.commit();
 
-        fragment = HistoryFragment.newInstance(this);
+        Bundle extras = getIntent().getExtras();
+        if(extras != null){
+            fragment = GraficaFragment.newInstance(this, extras.getLong("encuesta"));
+        }
+        else {
+            fragment = HistoryFragment.newInstance(this);
+            list = fragment;
+        }
     }
-
 
     @Override
     public void onFragmentReady() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment)
+                .addToBackStack(null).commit();
     }
 
     @Override
-    public void onFechaSelected(String fecha) {
-        Log.i("Fecha", fecha);
-        Toast.makeText(this, fecha, Toast.LENGTH_SHORT).show();
+    public void onFechaSelected(Long id) {
+        fragment = GraficaFragment.newInstance(this, id);
     }
 }

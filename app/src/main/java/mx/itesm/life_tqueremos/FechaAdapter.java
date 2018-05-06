@@ -19,10 +19,12 @@ import java.util.ArrayList;
 public class FechaAdapter extends ArrayAdapter<String> {
 
     HistoryFragment.OnFechaSelectedListener mListener;
+    ArrayList<Long> lList;
 
-    public FechaAdapter(@NonNull Context context, ArrayList<String> list) {
+    public FechaAdapter(@NonNull Context context, ArrayList<String> list, ArrayList<Long> ids) {
         super(context, 0, list);
         Activity activity;
+        lList = ids;
 
         if(context instanceof Activity){
             activity = (Activity) context;
@@ -55,7 +57,7 @@ public class FechaAdapter extends ArrayAdapter<String> {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onFechaSelected(getItem(pos));
+                mListener.onFechaSelected(lList.get(pos));
             }
         });
 

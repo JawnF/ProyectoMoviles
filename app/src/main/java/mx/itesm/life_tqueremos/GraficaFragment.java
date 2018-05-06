@@ -69,6 +69,21 @@ public class GraficaFragment extends Fragment {
     ListView list;
     private RadarChart rChart;
     Resultados resultados;
+    Long id;
+
+    public static GraficaFragment newInstance(OnFragmentReadyListener listener, long id){
+        GraficaFragment fragment = new GraficaFragment();
+        Resultados resultados = new Resultados(listener, id);
+        Bundle args = new Bundle();
+        args.putLong("id",id);
+        args.putParcelable("results", resultados);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    interface OnDimensionSelectedListener{
+        void onDimensionSelected(Long id);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstance){
@@ -91,14 +106,11 @@ public class GraficaFragment extends Fragment {
         rChart.setWebLineWidthInner(1f);
         rChart.setWebColorInner(Color.BLACK);
         rChart.setWebAlpha(100);
-        resultados = new Resultados();
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                setData();
-            }
-        }, 1000);   //5 seconds
+        id = getArguments().getLong("id");
+        resultados = getArguments().getParcelable("results");
+
+        setData();
 
         XAxis xAxis = rChart.getXAxis();
         xAxis.setTextSize(9f);

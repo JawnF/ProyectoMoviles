@@ -29,11 +29,12 @@ public class Resultados implements Parcelable {
     private int iIntelectual;
 
 
-    public Resultados() {
+    public Resultados(final OnFragmentReadyListener listener, long id) {
 
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference().child("users").child(uid).child("active");
+        DatabaseReference myRef = database.getReference().child("users").child(uid).child("entries")
+                .child(String.valueOf(id));
         iEspiritual = 0;
         iOcupacional = 0;
         iSocial = 0;
@@ -45,32 +46,34 @@ public class Resultados implements Parcelable {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if(dataSnapshot.child("Ocupacional").getValue()!=null)
-                    iOcupacional = dataSnapshot.child("Ocupacional").getValue(int.class);
+                    iOcupacional = Integer.valueOf(dataSnapshot.child("Ocupacional").getValue(String.class));
                 Log.d("PRUEBA2", "Ocupacional es: " + iOcupacional);
 
                 if(dataSnapshot.child("Espiritual").getValue()!=null)
-                    iEspiritual = dataSnapshot.child("Espiritual").getValue(int.class);
+                    iEspiritual = Integer.valueOf(dataSnapshot.child("Espiritual").getValue(String.class));
                 Log.d("PRUEBA2", "Espiritual es: " + iEspiritual);
 
                 if(dataSnapshot.child("Social").getValue()!=null)
-                    iSocial = dataSnapshot.child("Social").getValue(int.class);
+                    iSocial = Integer.valueOf(dataSnapshot.child("Social").getValue(String.class));
                 Log.d("PRUEBA2", "Social es: " + iSocial);
 
                 if(dataSnapshot.child("Emocional").getValue()!=null)
-                    iEmocional = dataSnapshot.child("Emocional").getValue(int.class);
+                    iEmocional = Integer.valueOf(dataSnapshot.child("Emocional").getValue(String.class));
                 Log.d("PRUEBA2", "Emocional es: " + iEmocional);
 
                 if(dataSnapshot.child("Físico").getValue()!=null)
-                    iFisico = dataSnapshot.child("Físico").getValue(int.class);
+                    iFisico = Integer.valueOf(dataSnapshot.child("Físico").getValue(String.class));
                 Log.d("PRUEBA2", "Fisico es: " + iFisico);
 
                 if(dataSnapshot.child("Intelectual").getValue()!=null)
-                    iIntelectual = dataSnapshot.child("Intelectual").getValue(int.class);
+                    iIntelectual = Integer.valueOf(dataSnapshot.child("Intelectual").getValue(String.class));
                 Log.d("PRUEBA2", "Intelectual es: " + iIntelectual);
 
                 if(dataSnapshot.child("Financiero").getValue()!=null)
-                    iFinanciero = dataSnapshot.child("Financiero").getValue(int.class);
+                    iFinanciero = Integer.valueOf(dataSnapshot.child("Financiero").getValue(String.class));
                 Log.d("PRUEBA2", "Financiero es: " + iFinanciero);
+
+                listener.onFragmentReady();
             }
 
             @Override

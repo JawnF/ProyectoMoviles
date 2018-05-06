@@ -64,6 +64,8 @@ public class DoneFragment extends Fragment {
                         }
 
                         userRef.child("active").setValue(null);
+
+                        mListener.onStartNewInteraction(id);
                     }
 
                     @Override
@@ -79,7 +81,6 @@ public class DoneFragment extends Fragment {
             }
         });
 
-        mListener.onStartNewInteraction();
     }
 
     @Override
@@ -118,6 +119,6 @@ public class DoneFragment extends Fragment {
 
 
     public interface OnStartNewListener {
-        void onStartNewInteraction();
+        void onStartNewInteraction(long id);
     }
 }

@@ -33,10 +33,11 @@ import java.util.function.Consumer;
 public class HistoryFragment extends ListFragment {
 
     interface OnFechaSelectedListener{
-        void onFechaSelected(String fecha);
+        void onFechaSelected(Long id);
     }
 
     ArrayList<String> list;
+    ArrayList<Long> ids;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -46,16 +47,23 @@ public class HistoryFragment extends ListFragment {
     public static HistoryFragment newInstance(final OnFragmentReadyListener listener) {
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        final HistoryFragment fragment = new HistoryFragment();
+        final Bundle args = new Bundle();
         final ArrayList<String> tList = new ArrayList<String>();
+        final ArrayList<Long> lList = new ArrayList<Long>();
         rootRef.child("users").child(uid).child("past").orderByKey()
                 .addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> s = dataSnapshot.getChildren();
                 for (DataSnapshot snapshot : s) {
+                    lList.add(0, Long.valueOf(snapshot.getKey()));
                     tList.add(0,(String)snapshot.getValue());
                     // Para guardar fecha usar new Date().toLocaleString();
                 }
+                args.putStringArrayList("list", tList);
+                args.putSerializable("ids", lList);
+                fragment.setArguments(args);
                 listener.onFragmentReady();
             }
 
@@ -65,10 +73,6 @@ public class HistoryFragment extends ListFragment {
             }
         });
 
-        HistoryFragment fragment = new HistoryFragment();
-        Bundle args = new Bundle();
-        args.putStringArrayList("list", tList);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -78,7 +82,8 @@ public class HistoryFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             list = getArguments().getStringArrayList("list");
-            setListAdapter(new FechaAdapter(getContext(), list));
+            ids = (ArrayList<Long>) getArguments().getSerializable("ids");
+            setListAdapter(new FechaAdapter(getContext(), list, ids));
         }
     }
 
