@@ -2,10 +2,14 @@ package mx.itesm.life_tqueremos;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.RadarChart;
@@ -28,19 +32,36 @@ import java.util.ArrayList;
  * Created by ivan on 14/04/2018.
  */
 
-public class Grafica extends AppCompatActivity{
+interface OnFragmentReadyListener{
+    void onFragmentReady();
+}
 
-    private String[] mActivities = new String[]{"Bienestar", "Social", "Emocional", "Financiero", "Espiritual","Intelectual","Fisico"};
-    ListView list;
-    private RadarChart rChart;
+public class Grafica extends AppCompatActivity implements OnFragmentReadyListener,
+                            HistoryFragment.OnFechaSelectedListener {
+
+    Fragment fragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poll);
-        GraficaFragment graficaFragment = new GraficaFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, graficaFragment);
+        fragmentTransaction.add(R.id.fragment_container, LoadingFragment.newInstance());
         fragmentTransaction.commit();
+
+        fragment = HistoryFragment.newInstance(this);
     }
 
+
+    @Override
+    public void onFragmentReady() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.fragment_container, fragment).commit();
+    }
+
+    @Override
+    public void onFechaSelected(String fecha) {
+        Log.i("Fecha", fecha);
+        Toast.makeText(this, fecha, Toast.LENGTH_SHORT).show();
+    }
 }
