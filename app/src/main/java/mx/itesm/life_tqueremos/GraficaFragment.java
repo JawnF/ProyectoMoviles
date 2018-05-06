@@ -27,6 +27,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -34,6 +35,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -85,7 +87,7 @@ public class GraficaFragment extends Fragment {
     }
 
     interface OnDimensionSelectedListener{
-        void onDimensionSelected(Long id);
+        void onDimensionSelected(String dim, int val);
     }
 
     @Override
@@ -102,7 +104,41 @@ public class GraficaFragment extends Fragment {
 
         list.setAdapter(Adapter);
 
-        list.setOnItemClickListener(null);
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                int iEnviar=0;
+                switch(position)
+                {
+                    case 0:
+                        iEnviar = resultados.getOcupacional();
+                        break;
+                    case 1:
+                        iEnviar = resultados.getSocial();
+                        break;
+                    case 2:
+                        iEnviar = resultados.getEmocional();
+                        break;
+                    case 3:
+                        iEnviar = resultados.getFinanciero();
+                        break;
+                    case 4:
+                        iEnviar = resultados.getEspiritual();
+                        break;
+                    case 5:
+                        iEnviar = resultados.getIntelectual();
+                        break;
+                    case 6:
+                        iEnviar = resultados.getFisico();
+                        break;
+
+                }
+                mCallback.onDimensionSelected(mActivities[position], iEnviar);
+            }
+
+
+        });
 
         rChart = (RadarChart) graficaView.findViewById(R.id.chart);
 

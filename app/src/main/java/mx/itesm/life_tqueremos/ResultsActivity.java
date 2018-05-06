@@ -80,7 +80,10 @@ public class ResultsActivity extends AppCompatActivity implements OnFragmentRead
     }
 
     @Override
-    public void onDimensionSelected(Long id) {
-
+    public void onDimensionSelected(String dim, int val) {
+        FragmentoRecomendaciones fragmento = FragmentoRecomendaciones.newInstance(dim, val);
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, fragmento);
+        fragmentTransaction.addToBackStack(null).commit();
     }
 }

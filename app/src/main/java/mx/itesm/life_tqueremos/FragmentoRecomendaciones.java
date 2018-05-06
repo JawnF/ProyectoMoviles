@@ -23,7 +23,6 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 
 
-
 public class FragmentoRecomendaciones extends Fragment {
 
     TextView tvNombre;
@@ -32,23 +31,17 @@ public class FragmentoRecomendaciones extends Fragment {
     private PieChart mChart;
     int iResultado=30;
 
-
     public FragmentoRecomendaciones() {
         // Required empty public constructor
     }
 
-    public static FragmentoRecomendaciones newInstance(String param1, String param2) {
+    public static FragmentoRecomendaciones newInstance(String dim, int val) {
         FragmentoRecomendaciones fragment = new FragmentoRecomendaciones();
         Bundle args = new Bundle();
+        args.putString("dim", dim);
+        args.putInt("val", val);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
     }
 
     @Override
@@ -58,9 +51,9 @@ public class FragmentoRecomendaciones extends Fragment {
         View view = inflater.inflate(R.layout.fragmento_recomendaciones, container, false);
         tvNombre = (TextView)view.findViewById(R.id.Name);
         tvRecomendaciones = (TextView)view.findViewById(R.id.Recomendaciones);
-
-        sNombreEncuesta=getArguments().getString("encuesta");
-
+        Bundle b = getArguments();
+        iResultado = b.getInt("val");
+        sNombreEncuesta = b.getString("dim");
 
         tvNombre.setText(sNombreEncuesta);
 
@@ -89,7 +82,7 @@ public class FragmentoRecomendaciones extends Fragment {
         mChart.setHighlightPerTapEnabled(true);
 
         mChart.setMaxAngle(360f); // HALF CHART
-        mChart.setRotationAngle(360f);
+        mChart.setRotationAngle(180f);
         mChart.setCenterTextOffset(0, -20);
 
         setData(3, 100);
@@ -153,20 +146,23 @@ public class FragmentoRecomendaciones extends Fragment {
         {
             values.add(new PieEntry(0));
             values.add(new PieEntry(0));
-            values.add(new PieEntry(100));
+            values.add(new PieEntry(iResultado));
+            values.add(new PieEntry(100-iResultado));
 
         }
         else if(iResultado<67 && iResultado>=34)
         {
             values.add(new PieEntry(0));
-            values.add(new PieEntry(100));
+            values.add(new PieEntry(iResultado));
             values.add(new PieEntry(0));
+            values.add(new PieEntry(100-iResultado));
         }
         else
         {
-            values.add(new PieEntry(100));
+            values.add(new PieEntry(iResultado));
             values.add(new PieEntry(0));
             values.add(new PieEntry(0));
+            values.add(new PieEntry(100-iResultado));
         }
 
 
@@ -174,8 +170,10 @@ public class FragmentoRecomendaciones extends Fragment {
         PieDataSet dataSet = new PieDataSet(values, "Election Results");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-
-        dataSet.setColors(ColorTemplate.MATERIAL_COLORS);
+        dataSet.setColors(Color.parseColor("#2ecc71"),
+                Color.parseColor("#f1c40f"),
+                Color.parseColor("#e74c3c"),
+                Color.WHITE);
         //dataSet.setSelectionShift(0f);
 
         PieData data = new PieData(dataSet);
