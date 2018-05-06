@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="mx.itesm.life_tqueremos.HistoryFragment">
+
+    <TextView
+        android:id="@+id/resultados_title"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Encuestas Pasadas"
+        android:textStyle="bold"
+        android:textSize="20dp"/>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:background="#4CAF50" />
+
+    <ListView
+        app:layout_constraintTop_toBottomOf="@id/resultados_title"
+        android:dividerHeight="0dp"
+        android:divider="@null"
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
