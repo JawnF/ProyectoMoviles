@@ -11,8 +11,10 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -28,11 +30,22 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private ActionBarDrawerToggle mToggle;
     private FirebaseAuth firebaseAuth;
     private CardView cvEspiritual, cvEmocional, cvOcupacional, cvFisico, cvFinanciero, cvIntelectual, cvSocial;
+    private TextView tvNombre;
+    private TextView tvMail;
+    private View headerView;
+    String name, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address etc
+             name = user.getDisplayName();
+             email = user.getEmail();
+        }
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -41,9 +54,16 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.addDrawerListener(mToggle);
         mToggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        NavigationView navigationView = findViewById(R.id.navigationView);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.bringToFront();
+
+        headerView = navigationView.getHeaderView(0);
+        tvNombre = (TextView) headerView.findViewById(R.id.textView_nombre);
+        tvMail = (TextView) headerView.findViewById(R.id.textView_mail);
+
+        tvNombre.setText(name);
+        tvMail.setText(email);
 
         cvSocial = (CardView) findViewById(R.id.cardView_social);
         cvEspiritual = (CardView) findViewById(R.id.cardView_espiritual);
@@ -163,8 +183,17 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
                 firebaseAuth.signOut();
                 finish();
                 startActivity(new Intent(this, LoginActivity.class));
-
+                break;
+            case R.id.perfil:
+                finish();
+                startActivity(new Intent(this, UsuarioActivity.class));
+                break;
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
     }
 }
