@@ -15,7 +15,4 @@
     <string name="signup_registrar">Registrar</string>
     <string name="signup_yaregistrado">¿Ya eres miembro? Ingresa</string>
     <string name="signup_nombre">Nombre</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

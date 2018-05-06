@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context="mx.itesm.life_tqueremos.FragmentoRecomendaciones"
+tools:layout_editor_absoluteY="81dp">
+
+<!-- TODO: Update blank fragment layout -->
+
+<LinearLayout
+    android:id="@+id/layout2"
+    android:layout_width="match_parent"
+    android:layout_height="25dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:layout_marginTop="10dp"
+    tools:ignore="DuplicateIds">
+
+    <TextView
+        android:id="@+id/Name"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="1 de 10"
+        android:textColor="@android:color/black"
+        android:textSize="20dp"
+        android:textStyle="bold" />
+
+
+</LinearLayout>
+
+<LinearLayout
+    android:id="@+id/layout3"
+    android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_height="200dp">
+
+    <com.github.mikephil.charting.charts.PieChart
+        android:id="@+id/Piechart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></com.github.mikephil.charting.charts.PieChart>
+</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout4"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="25dp"
+            android:gravity="center_horizontal"
+            android:textSize="20dp"
+            android:text="Te recomendamos..." />
+
+        <TextView
+            android:id="@+id/Recomendaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:gravity="left"
+            android:text="TextView" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+
