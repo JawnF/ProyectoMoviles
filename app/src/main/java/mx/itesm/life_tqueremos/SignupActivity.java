@@ -100,6 +100,7 @@ public class SignupActivity extends AppCompatActivity {
         String email = tietEmail.getText().toString();
 
         if (name.isEmpty() || password.isEmpty() || email.isEmpty()) {
+            progressDialog.dismiss();
             Toast.makeText(this,"Please enter all the details", Toast.LENGTH_SHORT).show();
         }
         else {
