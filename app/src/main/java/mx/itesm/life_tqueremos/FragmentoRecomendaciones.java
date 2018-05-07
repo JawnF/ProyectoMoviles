@@ -128,7 +128,7 @@ public class FragmentoRecomendaciones extends Fragment {
                 tvRecomendaciones.setText("Cátedras académicas.\nMAE´s.\nPasión por la lectura.\nCentro de escritura.");
                 break;
 
-            case "Fisico":
+            case "Físico":
                 tvRecomendaciones.setText("Participar en actividades deportivas (intramuros, clubs).\nParticipar en actividades de arte y cultura (clases, concursos).\nParticipar en campañas de vacunación y/o promoción de salud.");
                 break;
         }
