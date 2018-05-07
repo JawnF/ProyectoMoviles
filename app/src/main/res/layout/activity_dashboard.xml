@@ -76,7 +76,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Contribucion al medio ambiente y a la comunidad"
+                            android:text="Contribución al medio ambiente y a la comunidad"
                             android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
@@ -122,7 +122,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Busqueda del proposito en la existencia humana"
+                            android:text="Búsqueda del propósito en la existencia humana"
                             android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
@@ -177,7 +177,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Crecimiento personal a traves del trabajo"
+                            android:text="Crecimiento personal a través del trabajo"
                             android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
@@ -209,7 +209,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="Fisico"
+                            android:text="Físico"
                             android:textStyle="bold" />
 
                         <View
@@ -223,7 +223,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Regulacion de Actividad Fisica"
+                            android:text="Regulación de Actividad Física"
                             android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
@@ -324,7 +324,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Coniencia de propios sentimientos"
+                            android:text="Conciencia de propios sentimientos"
                             android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
@@ -379,7 +379,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Aspectos mentales y fisicos del dinero"
+                            android:text="Aspectos mentales y físicos del dinero"
                             android:textColor="@android:color/darker_gray" />
 
                     </LinearLayout>
