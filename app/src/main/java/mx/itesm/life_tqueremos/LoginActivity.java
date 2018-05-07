@@ -23,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private Button btnAcceder;
     private TextView tvRegistrar;
+    private TextView tvForgotPassword;
     private TextInputEditText tietMail;
     private TextInputEditText tietPassword;
     private FirebaseAuth firebaseAuth;
@@ -60,6 +61,15 @@ public class LoginActivity extends AppCompatActivity {
                 if (validar()) {
                     validate(tietMail.getText().toString(), tietPassword.getText().toString());
                 }
+            }
+        });
+
+        tvRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ForgotPasswordActivity.class));
+                overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+                finish();
             }
         });
     }
@@ -110,5 +120,6 @@ public class LoginActivity extends AppCompatActivity {
         tietPassword = (TextInputEditText) findViewById(R.id.editText_password);
         btnAcceder = (Button) findViewById(R.id.button_acceder);
         tvRegistrar = (TextView) findViewById(R.id.textView_registrar);
+        tvForgotPassword = (TextView) findViewById(R.id.textView_forgotPassword);
     }
 }

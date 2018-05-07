@@ -11,15 +11,11 @@
         android:roundIcon="@mipmap/tqueremos_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ResultsActivity">
-        </activity>
+        <activity android:name=".ResultsActivity"></activity>
         <activity
             android:name=".MenuActivity"
-            android:theme="@style/AppTheme">
-        </activity>
-        <activity
-            android:name=".PollActivity">
-        </activity>
+            android:theme="@style/AppTheme"></activity>
+        <activity android:name=".PollActivity"></activity>
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.Dark">
@@ -29,13 +25,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Dashboard">
-        </activity>
+        <activity android:name=".Dashboard"></activity>
         <activity
             android:name=".SignupActivity"
-            android:theme="@style/AppTheme.Dark">
-        </activity>
+            android:theme="@style/AppTheme.Dark"></activity>
 
         <service android:name=".MyFirebaseMessagingService">
             <intent-filter>
@@ -50,8 +43,8 @@
 
         <activity
             android:name=".UsuarioActivity"
-            android:parentActivityName=".MenuActivity">
-        </activity>
+            android:parentActivityName=".MenuActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>
