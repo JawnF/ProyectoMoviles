@@ -1,5 +1,6 @@
 package mx.itesm.life_tqueremos;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
@@ -15,6 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -24,12 +27,14 @@ public class SignupActivity extends AppCompatActivity {
     private TextInputEditText tietPassword;
     private Button btnRegistrar;
     private FirebaseAuth firebaseAuth;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         setupUIViews();
+        progressDialog = new ProgressDialog(this);
         firebaseAuth = FirebaseAuth.getInstance();
 
         etYaRegistrado.setOnClickListener(new View.OnClickListener() {
@@ -42,18 +47,34 @@ public class SignupActivity extends AppCompatActivity {
         btnRegistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog.setMessage("Registrando usuario..");
+                progressDialog.show();
                 if(validate()) {
                     //upload data to the database
+//                    String name = tietNombre.getText().toString();
                     String email = tietEmail.getText().toString().trim();
                     String password = tietPassword.getText().toString().trim();
                     firebaseAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(SignupActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-                                onBackPressed();
+                                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                                UserProfileChangeRequest userProfileChangeRequest = new UserProfileChangeRequest.Builder()
+                                        .setDisplayName(tietNombre.getText().toString())
+                                        .build();
+                                user.updateProfile(userProfileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()) {
+                                            progressDialog.dismiss();
+                                            Toast.makeText(SignupActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                            onBackPressed();
+                                        }
+                                    }
+                                });
                             }
                             else {
+                                progressDialog.dismiss();
                                 Toast.makeText(SignupActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
                             }
                         }

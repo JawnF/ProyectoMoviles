@@ -21,6 +21,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -58,6 +62,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
     private CardView cvEspiritual, cvEmocional, cvOcupacional, cvFisico, cvFinanciero, cvIntelectual, cvSocial;
     DoneListenerClass listener;
     NavigationView navigationView;
+    private TextView tvNombre;
+    private TextView tvMail;
+    private View headerView;
+    String name, email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +74,12 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
 
         listener = new DoneListenerClass(this);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address etc
+             name = user.getDisplayName();
+             email = user.getEmail();
+        }
 
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -77,6 +91,13 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         navigationView = findViewById(R.id.navigationView);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.bringToFront();
+
+        headerView = navigationView.getHeaderView(0);
+        tvNombre = (TextView) headerView.findViewById(R.id.textView_nombre);
+        tvMail = (TextView) headerView.findViewById(R.id.textView_mail);
+
+        tvNombre.setText(name);
+        tvMail.setText(email);
 
         cvSocial = (CardView) findViewById(R.id.cardView_social);
         cvEspiritual = (CardView) findViewById(R.id.cardView_espiritual);
@@ -259,6 +280,10 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
             case R.id.resultados:
                 startActivity(new Intent (this, ResultsActivity.class));
                 break;
+            case R.id.perfil:
+                finish();
+                startActivity(new Intent(this, UsuarioActivity.class));
+                break;
         }
         return false;
     }
@@ -285,6 +310,6 @@ public class MenuActivity extends AppCompatActivity implements NavigationView.On
         if(mDrawerLayout.isDrawerOpen(Gravity.START))
             mDrawerLayout.closeDrawers();
         else
-            super.onBackPressed();
+            moveTaskToBack(true);
     }
 }
