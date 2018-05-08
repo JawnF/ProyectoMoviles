@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "141439367897",
+    "firebase_url": "https://life-tqueremos.firebaseio.com",
+    "project_id": "life-tqueremos",
+    "storage_bucket": "life-tqueremos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141439367897:android:a44f75a0bbb9b505",
+        "android_client_info": {
+          "package_name": "mx.itesm.life_tqueremos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141439367897-fi1o04s5bman7jebekag6lv6m14upd9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.itesm.life_tqueremos",
+            "certificate_hash": "d16d96bf52036ca47ca33b6f4e6ea531b5aba325"
+          }
+        },
+        {
+          "client_id": "141439367897-d5kv6bee0l6eh8to63hsc6svisehqvct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG6MEZNuj-xK6Np8LjLfmrTMsQm9_9_0o"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141439367897-d5kv6bee0l6eh8to63hsc6svisehqvct.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
