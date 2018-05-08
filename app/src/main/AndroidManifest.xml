@@ -43,8 +43,11 @@
 
         <activity
             android:name=".UsuarioActivity"
-            android:parentActivityName=".MenuActivity"></activity>
-        <activity android:name=".ForgotPasswordActivity"></activity>
+            android:parentActivityName=".MenuActivity">
+        </activity>
+        <activity android:name=".ForgotPasswordActivity"
+            android:theme="@style/AppTheme.Dark">
+        </activity>
     </application>
 
 </manifest>

@@ -16,4 +16,8 @@
     <string name="signup_registrar">Registrar</string>
     <string name="signup_yaregistrado">¿Ya eres miembro? Ingresa</string>
     <string name="signup_nombre">Nombre</string>
+
+
+    <!--activity_forgotpassword-->
+    <string name="forgotpassword_regresar">Regresar</string>
 </resources>
