@@ -10,9 +10,14 @@
     <string name="login_password">Contraseña</string>
     <string name="login_acceder">Acceder</string>
     <string name="login_registrar">¿Eres nuevo aquí? Registrate</string>
+    <string name="login_forgotPassword">Olvide mi contraseña</string>
 
     <!--activity_signup-->
     <string name="signup_registrar">Registrar</string>
     <string name="signup_yaregistrado">¿Ya eres miembro? Ingresa</string>
     <string name="signup_nombre">Nombre</string>
+
+
+    <!--activity_forgotpassword-->
+    <string name="forgotpassword_regresar">Regresar</string>
 </resources>
