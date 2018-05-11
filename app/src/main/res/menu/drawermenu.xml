@@ -8,11 +8,11 @@
     <item
         android:id="@+id/encuestas"
         android:icon="@drawable/ic_assignment_black_24dp"
-        android:title="Encuestas" />
+        android:title="Encuesta" />
     <item
         android:id="@+id/resultados"
         android:icon="@drawable/ic_assessment_black_24dp"
-        android:title="Resultados" />
+        android:title="Historial de encuestas" />
     <item
         android:id="@+id/logout"
         android:icon="@drawable/ic_exit_to_app_black_24dp"
