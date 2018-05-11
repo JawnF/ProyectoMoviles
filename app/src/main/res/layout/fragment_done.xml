@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:gravity="center"
-            android:text="Has terminado las encuestas."
+            android:text="Has terminado la encuesta"
             android:textColor="@color/blanco"
             android:textSize="50sp"
             android:textStyle="bold" />
@@ -30,7 +30,7 @@
             android:layout_margin="20dp"
             android:background="@color/blanco"
             android:padding="10dp"
-            android:text="Ver mis resultados"
+            android:text="Ver mis resultados e iniciar nueva encuesta"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="20sp" />
 
