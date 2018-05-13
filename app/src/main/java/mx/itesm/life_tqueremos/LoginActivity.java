@@ -1,7 +1,10 @@
 package mx.itesm.life_tqueremos;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -96,20 +99,24 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void validate(String userName, String userPassword) {
-        progressDialog.setMessage("Loging in..");
+        progressDialog.setMessage("Iniciando sesión..");
         progressDialog.show();
         firebaseAuth.signInWithEmailAndPassword(userName, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     progressDialog.dismiss();
-                    Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Sesión iniciada", Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(LoginActivity.this, MenuActivity.class));
                     finish();
                 }
+                else if (isNetworkAvailable()) {
+                    progressDialog.dismiss();
+                    Toast.makeText(LoginActivity.this, "Tu mail o contraseña son incorrectos", Toast.LENGTH_SHORT).show();
+                }
                 else {
                     progressDialog.dismiss();
-                    Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Revisa tu conectividad a internet", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -121,5 +128,11 @@ public class LoginActivity extends AppCompatActivity {
         btnAcceder = (Button) findViewById(R.id.button_acceder);
         tvRegistrar = (TextView) findViewById(R.id.textView_registrar);
         tvForgotPassword = (TextView) findViewById(R.id.textView_forgotPassword);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
