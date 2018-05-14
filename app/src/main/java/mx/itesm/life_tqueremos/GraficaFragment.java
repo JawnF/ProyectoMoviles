@@ -67,7 +67,7 @@ import mx.itesm.life_tqueremos.R;
  * Created by Android on 26/03/2018.
  */
 
-public class    GraficaFragment extends Fragment {
+public class GraficaFragment extends Fragment {
 
     private String[] mActivities = new String[]{"Emocional", "Espiritual", "Intelectual", "Financiero","Físico", "Ocupacional", "Social"};
     ListView list;

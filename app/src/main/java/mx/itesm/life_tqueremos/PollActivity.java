@@ -1,8 +1,11 @@
 package mx.itesm.life_tqueremos;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.tv.TvContract;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Debug;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +16,8 @@ import android.widget.ProgressBar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.net.ConnectException;
 
 public class PollActivity extends AppCompatActivity implements PollFragment.OnPollAnsweredListener,
                                                                 Encuesta.OnPollReadyListener  {
@@ -60,19 +65,31 @@ public class PollActivity extends AppCompatActivity implements PollFragment.OnPo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poll);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, LoadingFragment.newInstance());
-        fragmentTransaction.commit();
+        if(!isNetworkAvailable()) {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, ConnectionlessFragment.newInstance());
+            fragmentTransaction.commit();
+
+        }
+        else if(isNetworkAvailable()) {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, LoadingFragment.newInstance());
+            fragmentTransaction.commit();
 
 //        Bundle bundle = getIntent().getExtras();
-        Intent intent = getIntent();
-        sNombreEncuesta = intent.getStringExtra("encuesta");
-        encuesta = new Encuesta(this, sNombreEncuesta);
+            Intent intent = getIntent();
+            sNombreEncuesta = intent.getStringExtra("encuesta");
+            encuesta = new Encuesta(this, sNombreEncuesta);
 //        System.out.println("nombre encuesta: "+sNombreEncuesta);
 
-        Log.d("Nombre encuesta", sNombreEncuesta);
+            Log.d("Nombre encuesta", sNombreEncuesta);
+        }
+    }
 
-
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
 }

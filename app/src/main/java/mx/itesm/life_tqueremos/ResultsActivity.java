@@ -1,6 +1,9 @@
 package mx.itesm.life_tqueremos;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -51,22 +55,30 @@ public class ResultsActivity extends AppCompatActivity implements OnFragmentRead
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poll);
 
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, LoadingFragment.newInstance());
-        fragmentTransaction.commit();
-
-        Bundle extras = getIntent().getExtras();
-        if(extras != null){
-            fragment = GraficaFragment.newInstance(this, extras.getLong("encuesta"));
+        if(!isNetworkAvailable()) {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, ConnectionlessFragment.newInstance());
+            fragmentTransaction.commit();
         }
-        else {
-            fragment = HistoryFragment.newInstance(this);
-            list = fragment;
+        else if (isNetworkAvailable()){
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, LoadingFragment.newInstance());
+            fragmentTransaction.commit();
+
+            Bundle extras = getIntent().getExtras();
+            if(extras != null){
+                fragment = GraficaFragment.newInstance(this, extras.getLong("encuesta"));
+            }
+            else {
+                fragment = HistoryFragment.newInstance(this);
+                list = fragment;
+            }
         }
     }
 
     @Override
     public void onFragmentReady() {
+        getSupportFragmentManager().popBackStack();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_container, fragment);
         if(addToBack)
@@ -76,8 +88,16 @@ public class ResultsActivity extends AppCompatActivity implements OnFragmentRead
 
     @Override
     public void onFechaSelected(Long id) {
-        addToBack = true;
-        fragment = GraficaFragment.newInstance(this, id);
+        if (isNetworkAvailable()) {
+            addToBack = true;
+            Fragment loading = LoadingFragment.newInstance();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, loading).addToBackStack(null).commit();
+            fragment = GraficaFragment.newInstance(this, id);
+        }
+        else if (!isNetworkAvailable()) {
+            Toast.makeText(this,"Verifique su conexión a internet", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -96,5 +116,11 @@ public class ResultsActivity extends AppCompatActivity implements OnFragmentRead
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
