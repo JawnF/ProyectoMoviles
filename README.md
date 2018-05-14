@@ -6,8 +6,8 @@ Proyecto semestral de la materia Proyecto de Desarrollo para Dispositivos Móvil
 
 ### Versión
 
-Versión: 1.0
-Fecha: <26/01/18>
+Versión: 2.0
+Fecha: <14/05/18>
 
 ### Desarrolladores:
 
@@ -35,7 +35,7 @@ Fecha: <26/01/18>
 
 ### Institución
 
-Este proyecto fue realizado para la clase de Proyecto de Desarrollo para Dispositivos M—viles - Android.
+Este proyecto fue realizado para la clase de Proyecto de Desarrollo para Dispositivos Móviles - Android.
 
 ITESM
 Campus Monterrey
