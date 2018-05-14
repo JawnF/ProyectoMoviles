@@ -78,6 +78,7 @@ public class ResultsActivity extends AppCompatActivity implements OnFragmentRead
 
     @Override
     public void onFragmentReady() {
+        getSupportFragmentManager().popBackStack();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_container, fragment);
         if(addToBack)
@@ -87,8 +88,16 @@ public class ResultsActivity extends AppCompatActivity implements OnFragmentRead
 
     @Override
     public void onFechaSelected(Long id) {
-        addToBack = true;
-        fragment = GraficaFragment.newInstance(this, id);
+        if (isNetworkAvailable()) {
+            addToBack = true;
+            Fragment loading = LoadingFragment.newInstance();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, loading).addToBackStack(null).commit();
+            fragment = GraficaFragment.newInstance(this, id);
+        }
+        else if (!isNetworkAvailable()) {
+            Toast.makeText(this,"Verifique su conexión a internet", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
