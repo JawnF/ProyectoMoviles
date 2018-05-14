@@ -89,8 +89,8 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             tietMail.setError(null);
         }
-        if (sPassword.isEmpty() || tietPassword.length() < 4 || tietPassword.length() > 10) {
-            tietPassword.setError("Entre 4 y 10 caracteres alfanuméricos");
+        if (sPassword.isEmpty() || tietPassword.length() < 6 || tietPassword.length() > 10) {
+            tietPassword.setError("Entre 6 y 10 caracteres alfanuméricos");
             bValid = false;
         } else {
             tietPassword.setError(null);

@@ -67,7 +67,7 @@ public class SignupActivity extends AppCompatActivity {
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()) {
                                             progressDialog.dismiss();
-                                            Toast.makeText(SignupActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(SignupActivity.this, "Registro de usuario exitoso", Toast.LENGTH_SHORT).show();
                                             onBackPressed();
                                         }
                                     }
@@ -75,7 +75,9 @@ public class SignupActivity extends AppCompatActivity {
                             }
                             else {
                                 progressDialog.dismiss();
-                                Toast.makeText(SignupActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(SignupActivity.this, "Error al registrar usuario", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+
                             }
                         }
                     });
@@ -94,19 +96,44 @@ public class SignupActivity extends AppCompatActivity {
     }
 
     private Boolean validate() {
-        Boolean result = false;
+        Boolean result = true;
         String name =  tietNombre.getText().toString();
         String password = tietPassword.getText().toString();
         String email = tietEmail.getText().toString();
 
-        if (name.isEmpty() || password.isEmpty() || email.isEmpty()) {
+        if(name.isEmpty()) {
             progressDialog.dismiss();
-            Toast.makeText(this,"Please enter all the details", Toast.LENGTH_SHORT).show();
+            tietNombre.setError("Ingrese su nombre");
+            result = false;
+        } else {
+            tietNombre.setError(null);
         }
-        else {
-            result = true;
+
+        if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            progressDialog.dismiss();
+            tietEmail.setError("Introduzca una dirección de correo electrónico válida");
+            result = false;
+        } else {
+            tietEmail.setError(null);
         }
+        if (password.isEmpty() || tietPassword.length() < 6 || tietPassword.length() > 10) {
+            progressDialog.dismiss();
+            tietPassword.setError("Entre 6 y 10 caracteres alfanuméricos");
+            result = false;
+        } else {
+            tietPassword.setError(null);
+        }
+
         return result;
+
+//        if (name.isEmpty() || password.isEmpty() || email.isEmpty()) {
+//            progressDialog.dismiss();
+//            Toast.makeText(this,"Por favor ingrese todos los datos solicitados", Toast.LENGTH_SHORT).show();
+//        }
+//        else {
+//            result = true;
+//        }
+//        return result;
     }
 
     @Override
